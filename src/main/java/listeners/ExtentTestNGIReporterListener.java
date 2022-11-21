@@ -14,6 +14,7 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 import controllers.InitMethod;
 import org.testng.*;
 
+import java.io.File;
 import java.net.InetAddress;
 import java.util.Calendar;
 import java.util.Date;
@@ -87,12 +88,49 @@ public class ExtentTestNGIReporterListener extends InitMethod implements IReport
                                     + "/src/test/resources/Reports/Images/" + result.getTestClass().getName()
                                     + "." + result.getMethod().getMethodName() + ".png").build());
 
-                    test.addScreenCaptureFromPath(System.getProperty("user.dir")
-                            + "./src/test/resources/Reports/Images/"
-                            + result.getTestClass().getName()
-                            + "." + result.getMethod().getMethodName() + ".png");
+//                    test.addScreenCaptureFromPath(System.getProperty("user.dir")
+//                            + "./src/test/resources/Reports/Images/"
+//                            + result.getTestClass().getName()
+//                            + "." + result.getMethod().getMethodName() + ".png");
+                    
+                    try {
+                        File directoryPath = new File(System.getProperty("user.dir")
+                                + "/src/test/resources/Reports/Images/" + result.getTestClass().getName() + "/" + result.getMethod().getMethodName());
+                        File filesList[] = directoryPath.listFiles();
+                        
+                        for (File file : filesList) {
+                        	test.pass("Step: " + file.getName().split("\\.")[0],MediaEntityBuilder.createScreenCaptureFromPath("./Images/" + result.getTestClass().getName() + "/" + result.getMethod().getMethodName()+ "/" +file.getName()).build());
+                        	
+    					}
+                       }
+                       catch(Exception e)
+                       {}
 
                 }
+                if (result.getStatus() == ITestResult.SUCCESS) {
+                    test.pass(result.getTestClass().getName()
+                                    + "." + result.getMethod().getMethodName(),
+                            MediaEntityBuilder.createScreenCaptureFromPath("./Images/"
+                                    + result.getTestClass().getName()
+                                    + "." + result.getMethod().getMethodName() + ".png").build());
+
+//                    test.addScreenCaptureFromPath("./Images/"
+//                            + result.getTestClass().getName()
+//                            + "." + result.getMethod().getMethodName() + ".png");
+                   try { 
+	                    File directoryPath = new File(System.getProperty("user.dir")
+	                            + "/src/test/resources/Reports/Images/" + result.getTestClass().getName() + "/" + result.getMethod().getMethodName());
+	                    File filesList[] = directoryPath.listFiles();
+	                    
+	                    for (File file : filesList) {
+	                    	test.pass("Step: " + file.getName().split("\\.")[0],MediaEntityBuilder.createScreenCaptureFromPath("./Images/" + result.getTestClass().getName() + "/" + result.getMethod().getMethodName()+ "/" +file.getName()).build());
+	                    	
+						}
+                   }catch(Exception e) {
+                	   
+                   }
+                }
+                
                 test.getModel().setStartTime(getTime(result.getStartMillis()));
                 test.getModel().setEndTime(getTime(result.getEndMillis()));
             }
