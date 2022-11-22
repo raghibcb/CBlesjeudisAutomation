@@ -13,10 +13,27 @@ public class LJSignUpTest extends PageFactoryInitializer {
 	public void LJSignUpWithoutResume(String testCaseID,String FirstName,String LastName,String Zipcode,String Password,String confirmPassword) throws Exception
 	{   //String zip_code = Integer.toString((int) Zipcode);
 		ljSignUpPage().clickOnSignUpLink();
-		ljSignUpPage().fillSignUpFormLastFewDetails(FirstName, LastName,Zipcode,Password,confirmPassword);
+		ljSignUpPage().fillSignUpFormDetails(FirstName, LastName,Zipcode,Password,confirmPassword);
 		//ljSignUpPage().uploadResumeFile();
 		ljSignUpPage().clickOnIacceptCheckBox();
 		ljSignUpPage().clickOnSubmitButton();
+		ljSignUpPage().deleteAccoun();
+		  
+				
+	}
+	
+	@Description("Verify the validation messages for mandatory field on SignUp page")
+	@Test(dataProvider="excelSheetNameAsMethodName",dataProviderClass=ExcelDataProvider.class)
+	public void LJSignUpAndValidateMandatoryfield(String testCaseID,String FirstName,String LastName,String Zipcode,String Password,String confirmPassword) throws Exception
+	{   //String zip_code = Integer.toString((int) Zipcode);
+		ljSignUpPage().clickOnSignUpLink();
+		ljSignUpPage().clickOnSubmitButton();
+		ljSignUpPage().validateMandatoryFieldErrorMessage();
+		ljSignUpPage().fillSignUpFormDetailsAndValdateMandatoryFields(FirstName, LastName,Zipcode,Password,confirmPassword);
+		ljSignUpPage().uploadResumeFile();
+		ljSignUpPage().ClickIacceptCheckBox();
+		ljSignUpPage().clickOnSubmitButton();
+		ljSignUpPage().deleteAccoun();
 		  
 				
 	}

@@ -75,6 +75,36 @@ public class LJSignUpPageObjects extends PageFactoryInitializer {
 	@FindBy(xpath="//label[@for=\"resume_visibility\"]")
 	private WebElement resumeVisibiltyCheckBox;
 	
+	@FindBy(xpath="//button[@id='delete-account-btn']")
+	private WebElement deleteAccountLink;
+	
+	@FindBy(xpath="//button[@id='confirm-delete-account']")
+	private WebElement deleteAccountButton;
+	
+	@FindBy(id="error-message-firstname")
+	private WebElement errMessageFName;
+	
+	@FindBy(id="error-message-lastname")
+	private WebElement errMessageLName;
+	
+	@FindBy(id="error-message-postalcode")
+	private WebElement errMessagePostalCode;
+	
+	@FindBy(id="error-message-postalcode")
+	private WebElement errMessagePassword;
+	
+	@FindBy(id="error-message-postalcode")
+	private WebElement errMessageConfirmPassword;
+	
+	@FindBy(id="error-message-email")
+	private WebElement errMessageEmailAddress;
+	
+	@FindBy(xpath="//input[@id='save-career-goals']")
+	private WebElement saveCareerGoals;
+	
+	@FindBy(xpath="//a[contains(text(),'Passer cette étape')]")
+	private WebElement skipThisStepAtCareerGoals;
+	
 	@Step("enter email address")
 	public LJSignUpPageObjects enterEmailAddress() throws Exception {
 		Thread.sleep(10000); 
@@ -89,7 +119,30 @@ public class LJSignUpPageObjects extends PageFactoryInitializer {
 	}
 	
 	@Step("fill sign up details")
-	public LJSignUpPageObjects fillSignUpFormLastFewDetails(String firstName, String lastName,String zipcode,String password,String confirmPassword) throws Exception {
+	public LJSignUpPageObjects fillSignUpFormDetailsAndValdateMandatoryFields(String firstName, String lastName,String zipcode,String password,String confirmPassword) throws Exception {
+		 
+		firstNameTextField.sendKeys(firstName);
+		lastNameTextField.sendKeys(lastName);
+		enterEmailAddress();
+		zipCode.sendKeys("95880");
+		passwordTextField.sendKeys(password);
+		confirmPasswordTextField.sendKeys(confirmPassword);
+		return this;
+	}
+	
+	@Step("fill sign up details")
+	public LJSignUpPageObjects validateMandatoryFieldErrorMessage() throws Exception {
+		errMessageFName.isDisplayed();
+		errMessageLName.isDisplayed();
+		errMessageEmailAddress.isDisplayed();
+		errMessagePostalCode.isDisplayed();
+		errMessagePassword.isDisplayed();
+		errMessageConfirmPassword.isDisplayed();
+		return this;
+	}
+	
+	@Step("fill sign up details")
+	public LJSignUpPageObjects fillSignUpFormDetails(String firstName, String lastName,String zipcode,String password,String confirmPassword) throws Exception {
 		 
 		firstNameTextField.sendKeys(firstName);
 		lastNameTextField.sendKeys(lastName);
@@ -108,7 +161,7 @@ public class LJSignUpPageObjects extends PageFactoryInitializer {
 		base.mousehover(uploadFile);
 		uploadFile.sendKeys(filepath);
 		Thread.sleep(30000);
-	saveFullPageMultiPleScreenshot("./src/test/resources/Reports/Images/tests.LJSignUpTest/LJSignUpWithoutResume/" + "uploadResumeFileSrc" + ".png");
+	saveFullPageMultiPleScreenshot("./src/test/resources/Reports/Images/tests.LJSignUpTest/LJSignUpAndValidateMandatoryfield/" + "uploadResumeFileSrc" + ".png");
 			 Thread.sleep(3000);
 		return this;
 	}
@@ -122,12 +175,40 @@ public class LJSignUpPageObjects extends PageFactoryInitializer {
 	}
 	
 	@Step("click on submit button")
+	public LJSignUpPageObjects deleteAccoun() throws Exception {
+		Thread.sleep(7000);
+		 getWebDriver().get(WebsiteURL+"/user/edit");
+		 deleteAccountLink.click();
+		 deleteAccountButton.click();
+		return this;
+	}
+	
+	@Step("click on submit button")
 	public LJSignUpPageObjects clickOnIacceptCheckBox() throws Exception {
 		utils.ScrollUtils.scrollByPixel(300);
 		utils.ExplicitWaiting.explicitWaitElementToBeClickable(IacceptCheckbox, 60);
 		IacceptCheckbox.click();
 		Thread.sleep(30000);
 		saveFullPageMultiPleScreenshot("./src/test/resources/Reports/Images/tests.LJSignUpTest/LJSignUpWithoutResume/" + "PersonaldetailseSrc" + ".png");
+	    Thread.sleep(3000);
+		return this;
+	}
+	
+	@Step("click on submit button")
+	public LJSignUpPageObjects ClickIacceptCheckBox() throws Exception {
+		utils.ScrollUtils.scrollByPixel(300);
+		utils.ExplicitWaiting.explicitWaitElementToBeClickable(IacceptCheckbox, 60);
+		IacceptCheckbox.click();
+		return this;
+	}
+	
+	@Step("click on submit button")
+	public LJSignUpPageObjects clickOnVisibleCheckBox() throws Exception {
+		utils.ScrollUtils.scrollToElement(resumeVisibiltyCheckBox);
+		utils.ExplicitWaiting.explicitWaitElementToBeClickable(resumeVisibiltyCheckBox, 60);
+		resumeVisibiltyCheckBox.click();
+		Thread.sleep(30000);
+		saveFullPageMultiPleScreenshot("./src/test/resources/Reports/Images/tests.LJSignUpTest/LJSignUpAndValidateMandatoryfield/" + "VisibleCheckboxUnchecked" + ".png");
 	    Thread.sleep(3000);
 		return this;
 	}
