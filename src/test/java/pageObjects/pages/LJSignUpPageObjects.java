@@ -105,6 +105,18 @@ public class LJSignUpPageObjects extends PageFactoryInitializer {
 	@FindBy(xpath="//a[contains(text(),'Passer cette étape')]")
 	private WebElement skipThisStepAtCareerGoals;
 	
+	@FindBy(xpath="//input[@name=\"toggle-check\" and @checked=\"checked\"]")
+	private WebElement visibleToggleAtProfileOn;
+	
+	@FindBy(xpath="//input[@class=\"slide-checkbox onoffswitch-checkbox\"]")
+	private WebElement visibleToggleAtProfileOFF;
+	
+	@FindBy(xpath="//a[@id=\"profile_contact_pref_tab\"]")
+	private WebElement contactPreferenceTab;
+	
+	@FindBy(xpath="//a[@id=\"profile_documents_tab\"]")
+	private WebElement documetTab;
+	
 	@Step("enter email address")
 	public LJSignUpPageObjects enterEmailAddress() throws Exception {
 		Thread.sleep(10000); 
@@ -187,7 +199,8 @@ public class LJSignUpPageObjects extends PageFactoryInitializer {
 	public LJSignUpPageObjects clickOnIacceptCheckBox() throws Exception {
 		utils.ScrollUtils.scrollByPixel(300);
 		utils.ExplicitWaiting.explicitWaitElementToBeClickable(IacceptCheckbox, 60);
-		IacceptCheckbox.click();
+		//IacceptCheckbox.click();
+		JSclick(IacceptCheckbox);
 		Thread.sleep(30000);
 		saveFullPageMultiPleScreenshot("./src/test/resources/Reports/Images/tests.LJSignUpTest/LJSignUpWithoutResume/" + "PersonaldetailseSrc" + ".png");
 	    Thread.sleep(3000);
@@ -198,7 +211,8 @@ public class LJSignUpPageObjects extends PageFactoryInitializer {
 	public LJSignUpPageObjects ClickIacceptCheckBox() throws Exception {
 		utils.ScrollUtils.scrollByPixel(300);
 		utils.ExplicitWaiting.explicitWaitElementToBeClickable(IacceptCheckbox, 60);
-		IacceptCheckbox.click();
+		//IacceptCheckbox.click();
+		JSclick(IacceptCheckbox);
 		return this;
 	}
 	
@@ -206,7 +220,8 @@ public class LJSignUpPageObjects extends PageFactoryInitializer {
 	public LJSignUpPageObjects clickOnVisibleCheckBox() throws Exception {
 		utils.ScrollUtils.scrollToElement(resumeVisibiltyCheckBox);
 		utils.ExplicitWaiting.explicitWaitElementToBeClickable(resumeVisibiltyCheckBox, 60);
-		resumeVisibiltyCheckBox.click();
+		//resumeVisibiltyCheckBox.click();
+		JSclick(resumeVisibiltyCheckBox);
 		Thread.sleep(30000);
 		saveFullPageMultiPleScreenshot("./src/test/resources/Reports/Images/tests.LJSignUpTest/LJSignUpAndValidateMandatoryfield/" + "VisibleCheckboxUnchecked" + ".png");
 	    Thread.sleep(3000);
@@ -230,4 +245,48 @@ public class LJSignUpPageObjects extends PageFactoryInitializer {
 		skipThisStepAtCareerGoals.click();
 		return this;
 	}
+	
+	@Step("visible toggle On")
+	public LJSignUpPageObjects verifyVisibleToggleOnAtProfile() throws Exception {
+	    utils.ExplicitWaiting.explicitWaitElementToBeClickable(visibleToggleAtProfileOn, 60);
+		visibleToggleAtProfileOn.isDisplayed();
+		Thread.sleep(30000);
+		saveFullPageMultiPleScreenshot("./src/test/resources/Reports/Images/tests.LJSignUpTest/lJSignWithUploadResumeValidateProfileVisibility/" + "VisibleCheckboxON" + ".png");
+	    Thread.sleep(3000);
+		return this;
+	}
+	
+	@Step("visible toggle off")
+	public LJSignUpPageObjects verifyVisibleToggleOffAtProfile() throws Exception {
+	    utils.ExplicitWaiting.explicitWaitVisibilityOfElement(visibleToggleAtProfileOn, 60);
+		visibleToggleAtProfileOn.isDisplayed();
+		Thread.sleep(30000);
+		saveFullPageMultiPleScreenshot("./src/test/resources/Reports/Images/tests.LJSignUpTest/LJSignUpAndValidateMandatoryfield/" + "VisibleCheckboxUncheckedOFF" + ".png");
+	    Thread.sleep(3000);
+		return this;
+	}
+	
+	@Step("visible toggle off")
+	public LJSignUpPageObjects clickOnContactreferenceTab() throws Exception {
+	    utils.ExplicitWaiting.explicitWaitElementToBeClickable(contactPreferenceTab, 60);
+	    contactPreferenceTab.click();
+		return this;
+	}
+	
+	@Step("visible toggle off")
+	public LJSignUpPageObjects ContactreferenceTabSectionScreenShot() throws Exception {
+	    Thread.sleep(30000);
+		saveFullPageMultiPleScreenshot("./src/test/resources/Reports/Images/tests.LJSignUpTest/lJSignWithUploadResumeValidateProfileVisibility/" + "contactPreferences" + ".png");
+	    Thread.sleep(3000);
+		return this;
+	}
+	
+	@Step("visible toggle off")
+	public LJSignUpPageObjects clickOnDocumentTab() throws Exception {
+	    utils.ExplicitWaiting.explicitWaitElementToBeClickable(documetTab, 60);
+	    documetTab.click();
+		return this;
+	}
+	
+	
 }

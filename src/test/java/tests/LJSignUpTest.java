@@ -35,7 +35,29 @@ public class LJSignUpTest extends PageFactoryInitializer {
 		ljSignUpPage().ClickIacceptCheckBox();
 		ljSignUpPage().clickOnSubmitButton();
 		ljSignUpPage().ClickOnSaveCareerGoals();
+		ljSignUpPage().verifyVisibleToggleOffAtProfile();
+		ljSignUpPage().clickOnContactreferenceTab();
 		ljSignUpPage().deleteAccoun();
+		  
+				
+	}
+	
+	@Description("Verify that user is able to SignUp successfully with Upload Resume Option and resumes details are visible correctly in MyProfile page")
+	@Test(dataProvider="excelSheetNameAsMethodName",dataProviderClass=ExcelDataProvider.class)
+	public void lJSignWithUploadResumeValidateProfileVisibility(String testCaseID,String FirstName,String LastName,String Zipcode,String Password,String confirmPassword) throws Exception
+	{   //String zip_code = Integer.toString((int) Zipcode);
+		ljSignUpPage().clickOnSignUpLink();
+		ljSignUpPage().clickOnSubmitButton();
+		ljSignUpPage().fillSignUpFormDetails(FirstName, LastName,Zipcode,Password,confirmPassword);
+		ljSignUpPage().uploadResumeFile();
+		ljSignUpPage().ClickIacceptCheckBox();
+		ljSignUpPage().clickOnSubmitButton();
+		ljSignUpPage().ClickOnCancelCareerGoals();
+		ljSignUpPage().verifyVisibleToggleOnAtProfile();
+		ljSignUpPage().clickOnContactreferenceTab();
+		ljSignUpPage().ContactreferenceTabSectionScreenShot();
+		ljSignUpPage().clickOnDocumentTab();
+		//ljSignUpPage().deleteAccoun();
 		  
 				
 	}
