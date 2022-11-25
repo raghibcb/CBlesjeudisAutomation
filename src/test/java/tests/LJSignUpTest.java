@@ -31,8 +31,10 @@ public class LJSignUpTest extends PageFactoryInitializer {
 		ljSignUpPage().validateMandatoryFieldErrorMessage();
 		ljSignUpPage().fillSignUpFormDetailsAndValdateMandatoryFields(FirstName, LastName,Zipcode,Password,confirmPassword);
 		ljSignUpPage().uploadResumeFile();
+		ljSignUpPage().clickOnVisibleCheckBox();
 		ljSignUpPage().ClickIacceptCheckBox();
 		ljSignUpPage().clickOnSubmitButton();
+		ljSignUpPage().ClickOnSaveCareerGoals();
 		ljSignUpPage().deleteAccoun();
 		  
 				

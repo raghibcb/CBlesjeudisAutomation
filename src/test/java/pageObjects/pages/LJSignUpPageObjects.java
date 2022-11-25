@@ -212,4 +212,22 @@ public class LJSignUpPageObjects extends PageFactoryInitializer {
 	    Thread.sleep(3000);
 		return this;
 	}
+	
+	@Step("click on save career goals")
+	public LJSignUpPageObjects ClickOnSaveCareerGoals() throws Exception {
+		//utils.ScrollUtils.scrollByPixel(300);
+		utils.ScrollUtils.scrollToBottom();
+		utils.ExplicitWaiting.explicitWaitElementToBeClickable(saveCareerGoals, 60);
+		saveCareerGoals.click();
+		return this;
+	}
+	
+	@Step("click on  skip save career goals")
+	public LJSignUpPageObjects ClickOnCancelCareerGoals() throws Exception {
+		//utils.ScrollUtils.scrollByPixel(300);
+		utils.ScrollUtils.scrollToBottom();
+		utils.ExplicitWaiting.explicitWaitElementToBeClickable(skipThisStepAtCareerGoals, 60);
+		skipThisStepAtCareerGoals.click();
+		return this;
+	}
 }
