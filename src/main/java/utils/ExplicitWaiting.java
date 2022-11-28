@@ -117,4 +117,9 @@ public  class ExplicitWaiting extends BaseMethod
 		WebDriverWait waitForAlert = new WebDriverWait(getWebDriver(), time);
 		waitForAlert.until(ExpectedConditions.alertIsPresent());
 	}
+	
+	public static void explicitWaitTitleContains(int time, String title) {
+		WebDriverWait titleContains = new WebDriverWait(getWebDriver(), time);
+		titleContains.until(ExpectedConditions.titleContains(title));
+	}
 }

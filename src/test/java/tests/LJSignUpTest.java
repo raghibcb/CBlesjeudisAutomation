@@ -44,7 +44,7 @@ public class LJSignUpTest extends PageFactoryInitializer {
 	
 	@Description("Verify that user is able to SignUp successfully with Upload Resume Option and resumes details are visible correctly in MyProfile page")
 	@Test(dataProvider="excelSheetNameAsMethodName",dataProviderClass=ExcelDataProvider.class)
-	public void lJSignWithUploadResumeValidateProfileVisibility(String testCaseID,String FirstName,String LastName,String Zipcode,String Password,String confirmPassword) throws Exception
+	public void lJSignUpWithUploadResumeValidateProfileVisibility(String testCaseID,String FirstName,String LastName,String Zipcode,String Password,String confirmPassword) throws Exception
 	{   //String zip_code = Integer.toString((int) Zipcode);
 		ljSignUpPage().clickOnSignUpLink();
 		ljSignUpPage().clickOnSubmitButton();
@@ -60,5 +60,61 @@ public class LJSignUpTest extends PageFactoryInitializer {
 		//ljSignUpPage().deleteAccoun();
 		  
 				
+	}
+	
+	@Description("Verify that user is able to SignUp successfully with Copy/Paste Resume Option and resumes details are visible correctly in MyProfile page")
+	@Test(dataProvider="excelSheetNameAsMethodName",dataProviderClass=ExcelDataProvider.class)
+	public void lJSignUpWithCopyPaste(String testCaseID,String FirstName,String LastName,String Zipcode,String Password,String confirmPassword) throws Exception
+	{   //String zip_code = Integer.toString((int) Zipcode);
+		ljSignUpPage().clickOnSignUpLink();
+		ljSignUpPage().clickOnSubmitButton();
+		ljSignUpPage().fillSignUpFormDetails(FirstName, LastName,Zipcode,Password,confirmPassword);
+		ljSignUpPage().clickOnuploadResumeIcon();
+	//ljSignUpPage().uploadResumeFile();
+		ljSignUpPage().ReadandCopyPase();
+		ljSignUpPage().ClickIacceptCheckBox();
+		ljSignUpPage().clickOnSubmitButton();
+		ljSignUpPage().ClickOnSaveCareerGoals();
+		ljSignUpPage().verifyVisibleToggleOnAtProfileCopy();
+		ljSignUpPage().clickOnContactreferenceTab();
+		ljSignUpPage().ContactreferenceForCopyPasteTabSectionScreenShot();
+		ljSignUpPage().clickOnDocumentTab();
+		//ljSignUpPage().deleteAccoun();
+		  
+				
+	}
+	
+	@Description("Verify that user is able to SignIn successfully with valid credentials")
+	@Test(dataProvider="excelSheetNameAsMethodName",dataProviderClass=ExcelDataProvider.class)
+	public void ljVerifySignInWithValidCredentials(String testCaseID,String email,String password) throws Exception
+	{    
+		ljSignUpPage().clickOnSignInLink();
+		ljSignUpPage().enterLoginDetailAndSubmit(email,password);
+		ljSignUpPage().verifyPageTitle();
+		//ljSignUpPage(). veriFyLogOutSuccessfully();	  		
+	}
+	
+	@Description("Verify that user is able to SignIn successfully with valid credentials")
+	@Test(dataProvider="excelSheetNameAsMethodName",dataProviderClass=ExcelDataProvider.class)
+	public void ljVerifyLogOutSuccessfully(String testCaseID,String email,String password) throws Exception
+	{    
+		ljSignUpPage().clickOnSignInLink();
+		ljSignUpPage().enterLoginDetailAndSubmit(email,password);
+		ljSignUpPage().verifyPageTitle();
+		ljSignUpPage(). veriFyLogOutSuccessfully();	  		
+	}
+	
+	@Description("Verify that user is able to SignIn with Invalid credentials")
+	@Test(dataProvider="excelSheetNameAsMethodName",dataProviderClass=ExcelDataProvider.class)
+	public void ljVerifySignInWithInValidCredentials(String testCaseID,String invalidemail,String invalidpassword,String password,String email) throws Exception
+	{    
+		ljSignUpPage().clickOnSignInLink();
+		ljSignUpPage().enterLoginInvalidDetailAndSubmit(invalidemail,invalidpassword);
+		ljSignUpPage().verifyWrongToasMessage();
+		ljSignUpPage().enterLoginInvalidUserNameDetailAndSubmit(invalidemail,password);
+		ljSignUpPage().verifyWrongToastMessageForInvaliduser();
+		ljSignUpPage().enterLoginInvalidPasswordDetailAndSubmit(email,invalidpassword);
+		//ljSignUpPage().verifyPageTitle();
+		//ljSignUpPage(). veriFyLogOutSuccessfully();	  		
 	}
 }
