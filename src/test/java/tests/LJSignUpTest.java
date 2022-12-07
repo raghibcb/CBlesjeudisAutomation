@@ -17,6 +17,9 @@ public class LJSignUpTest extends PageFactoryInitializer {
 		//ljSignUpPage().uploadResumeFile();
 		ljSignUpPage().clickOnIacceptCheckBox();
 		ljSignUpPage().clickOnSubmitButton();
+		//scrn shoot
+		//Again Upload Resume
+		//Again Screen shot
 		ljSignUpPage().deleteAccoun();
 		  
 				
@@ -29,6 +32,7 @@ public class LJSignUpTest extends PageFactoryInitializer {
 		ljSignUpPage().clickOnSignUpLink();
 		ljSignUpPage().clickOnSubmitButton();
 		ljSignUpPage().validateMandatoryFieldErrorMessage();
+		//scrn
 		ljSignUpPage().fillSignUpFormDetailsAndValdateMandatoryFields(FirstName, LastName,Zipcode,Password,confirmPassword);
 		ljSignUpPage().uploadResumeFile();
 		ljSignUpPage().clickOnVisibleCheckBox();
@@ -114,6 +118,31 @@ public class LJSignUpTest extends PageFactoryInitializer {
 		ljSignUpPage().enterLoginInvalidUserNameDetailAndSubmit(invalidemail,password);
 		ljSignUpPage().verifyWrongToastMessageForInvaliduser();
 		ljSignUpPage().enterLoginInvalidPasswordDetailAndSubmit(email,invalidpassword);
+		//ljSignUpPage().verifyPageTitle();
+		//ljSignUpPage(). veriFyLogOutSuccessfully();	  		
+	}
+	
+	@Description("Verify that user is able to SignUp successfully with Build Resume Option and resumes details are visible correctly in MyProfile page")
+	@Test(dataProvider="excelSheetNameAsMethodName",dataProviderClass=ExcelDataProvider.class)
+	public void ljSignUpUsingBuildResumeOption(String testCaseID,String FirstName,String LastName,String Zipcode,String Password,String confirmPassword,String city,String jobtitle,String company,String Startdatemonth,String Enddatemonth,String Degree,String SchoolName,String SubjectName) throws Exception
+	{    
+		ljSignUpPage().clickOnSignUpLink();
+		//String zipcodeStr = Integer.toString((int) Zipcode);
+		ljSignUpPage().fillSignUpFormDetails(FirstName, LastName,Zipcode,Password,confirmPassword);
+		ljSignUpPage().clickOnuploadResumeIcon();
+		ljSignUpPage().clickOnBuildResumeOption();
+		ljSignUpPage().ClickIacceptCheckBox();
+		ljSignUpPage().clickOnSubmitButton();
+		ljSignUpPage().enterPersonalInforMationForBuildResume(city);
+		ljSignUpPage().clickOnPersonalInformationNextButton();
+		ljSignUpPage().fillworkhistorydetails(jobtitle,company);
+		//String Month = Integer.toString((int) Startdatemonth);
+		ljSignUpPage().selectStartdate("0");
+		//String EndMonth = Integer.toString((int) Enddatemonth);
+		ljSignUpPage().selectEnddate("4");
+		ljSignUpPage().clickOnNext();
+		ljSignUpPage().fillEducaionDetails(Degree,SchoolName,SubjectName);
+		ljSignUpPage().clickOnCreateAccountUsingBuildButtonForSignUp();
 		//ljSignUpPage().verifyPageTitle();
 		//ljSignUpPage(). veriFyLogOutSuccessfully();	  		
 	}
