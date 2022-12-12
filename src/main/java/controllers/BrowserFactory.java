@@ -11,6 +11,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.annotations.Listeners;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -29,8 +31,27 @@ public class BrowserFactory extends InitMethod {
         switch (Browser.toLowerCase()) {
             case "chrome":
                 System.setProperty("webdriver.chrome.driver", "src/main/resources/Drivers/chromedriver.exe");
-                driver = new ChromeDriver();
+                String downloadFilepath = System.getProperty("user.dir")+"\\src\\test\\resources\\Download";
+            	HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+            	chromePrefs.put("download.default_directory", downloadFilepath);
+            	chromePrefs.put("profile.default_content_settings.popups", 0);
+            	chromePrefs.put( "profile.content_settings.pattern_pairs.*.multiple-automatic-downloads", 1 );
+            	chromePrefs.put("credentials_enable_service", false);
+            	chromePrefs.put("profile.password_manager_enabled", false);
+            	ChromeOptions options = new ChromeOptions();
+            	options.addArguments("--disable-infobars");
+            	options.addArguments("--disable-notifications");
+            	//options.addArguments("--start-maximized");
+            	//options.addArguments("--disable-overlay-scrollbar");
+            	options.setExperimentalOption("prefs", chromePrefs);
+            	options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
+            	options.setExperimentalOption("useAutomationExtension", false);
+            	DesiredCapabilities cap = DesiredCapabilities.chrome();
+            	cap.setCapability("applicationCacheEnabled", false);
+            	cap.setCapability(ChromeOptions.CAPABILITY, options);
+            	driver = new ChromeDriver(cap);
                 break;
+                
 
             case "chrome_headless":
                 System.setProperty("webdriver.chrome.driver", "src/main/resources/Drivers/chromedriver.exe");

@@ -135,6 +135,7 @@ public class LJSignUpTest extends PageFactoryInitializer {
 		ljSignUpPage().clickOnSubmitButton();
 		ljSignUpPage().enterPersonalInforMationForBuildResume(city);
 		ljSignUpPage().clickOnPersonalInformationNextButton();
+		//scrn
 		ljSignUpPage().fillworkhistorydetails(jobtitle,company);
 		//String Month = Integer.toString((int) Startdatemonth);
 		ljSignUpPage().selectStartdate("0");
@@ -142,7 +143,11 @@ public class LJSignUpTest extends PageFactoryInitializer {
 		ljSignUpPage().selectEnddate("4");
 		ljSignUpPage().clickOnNext();
 		ljSignUpPage().fillEducaionDetails(Degree,SchoolName,SubjectName);
+		//scrn
 		ljSignUpPage().clickOnCreateAccountUsingBuildButtonForSignUp();
+		//scrn
+		//Last At resume section scrn
+		//verify title at document As firstName_LastName.pdf
 		//ljSignUpPage().verifyPageTitle();
 		//ljSignUpPage(). veriFyLogOutSuccessfully();	  		
 	}

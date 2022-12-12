@@ -579,7 +579,7 @@ public class LJSignUpPageObjects extends PageFactoryInitializer {
 	public LJSignUpPageObjects clickOnBuildResumeOption() throws Exception {
 	    utils.ExplicitWaiting.explicitWaitElementToBeClickable(buildResumeOption, 60);
 	    base.mousehover(buildResumeOption);
-	    buildResumeOption.click();
+	    //buildResumeOption.click();
 	    JSclick(buildResumeOption);
 		return this;
 	}
@@ -672,6 +672,14 @@ public class LJSignUpPageObjects extends PageFactoryInitializer {
 	    JSclick(createAccountBuild);
 	    saveFullPageMultiPleScreenshot("./src/test/resources/Reports/Images/tests.LJSignUpTest/ljSignUpUsingBuildResumeOption/" + "Build Page" + ".png");
 		 Thread.sleep(3000);
+		return this;
+	}
+	
+	@Step(" create Account Using Build Button")
+	public LJSignUpPageObjects clickOnCreateAccountUsingBuildButton() throws Exception {
+	    utils.ExplicitWaiting.explicitWaitVisibilityOfElement(createAccountBuild, 60);
+	    //createAccountBuild.click();
+	    JSclick(createAccountBuild);
 		return this;
 	}
 	
