@@ -368,6 +368,27 @@ public class LJSignUpPageObjects extends PageFactoryInitializer {
 	     copyPaseValidteButton.click();
 		return this;
 }
+	
+	@SuppressWarnings({ "resource", "static-access" })
+	@Step("Read and Copy Paste")
+	public LJSignUpPageObjects ReadandCopyPaseForAddResume()throws Exception{
+		base.mousehover(uploadFileWithcopyPaste);
+		uploadFileWithcopyPaste.click();
+		 XWPFDocument doc = new XWPFDocument(Files.newInputStream(Paths.get(filepath)));
+		XWPFWordExtractor xwpfWordExtractor = new XWPFWordExtractor(doc);
+	     String docText = xwpfWordExtractor.getText();
+	     StringSelection stringSelection = new StringSelection(docText);
+	     Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+	     clipboard.setContents(stringSelection, null);
+	     Thread.sleep(10);
+	     Copypaste.sendKeys(Keys.SHIFT, Keys.INSERT);
+	     Thread.sleep(20);
+	     Thread.sleep(20000);
+			saveFullPageMultiPleScreenshot("./src/test/resources/Reports/Images/tests.LJMypofileTest/lJVerifyUserAbleToAddResumeeWithCopyPaste/" + "lJAddResumeWithCopyPasteSrc" + ".png");
+		    Thread.sleep(3000);
+	     copyPaseValidteButton.click();
+		return this;
+}
 
 	
 	@Step("fill sign up details")
