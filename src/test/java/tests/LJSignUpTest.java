@@ -51,7 +51,6 @@ public class LJSignUpTest extends PageFactoryInitializer {
 	public void lJSignUpWithUploadResumeValidateProfileVisibility(String testCaseID,String FirstName,String LastName,String Zipcode,String Password,String confirmPassword) throws Exception
 	{   //String zip_code = Integer.toString((int) Zipcode);
 		ljSignUpPage().clickOnSignUpLink();
-		ljSignUpPage().clickOnSubmitButton();
 		ljSignUpPage().fillSignUpFormDetails(FirstName, LastName,Zipcode,Password,confirmPassword);
 		ljSignUpPage().uploadResumeFile();
 		ljSignUpPage().ClickIacceptCheckBox();
@@ -71,7 +70,6 @@ public class LJSignUpTest extends PageFactoryInitializer {
 	public void lJSignUpWithCopyPaste(String testCaseID,String FirstName,String LastName,String Zipcode,String Password,String confirmPassword) throws Exception
 	{   //String zip_code = Integer.toString((int) Zipcode);
 		ljSignUpPage().clickOnSignUpLink();
-		ljSignUpPage().clickOnSubmitButton();
 		ljSignUpPage().fillSignUpFormDetails(FirstName, LastName,Zipcode,Password,confirmPassword);
 		ljSignUpPage().clickOnuploadResumeIcon();
 	//ljSignUpPage().uploadResumeFile();
@@ -150,5 +148,23 @@ public class LJSignUpTest extends PageFactoryInitializer {
 		//verify title at document As firstName_LastName.pdf
 		//ljSignUpPage().verifyPageTitle();
 		//ljSignUpPage(). veriFyLogOutSuccessfully();	  		
+	}
+	
+	@Description("Verify that required details are Automatically added to Career Goals page after user Registers using resume")
+	@Test(dataProvider="excelSheetNameAsMethodName",dataProviderClass=ExcelDataProvider.class)
+	public void lJVerifyRequiredDetailsAddedAutomatically(String testCaseID,String FirstName,String LastName,String Zipcode,String Password,String confirmPassword) throws Exception
+	{   //String zip_code = Integer.toString((int) Zipcode);
+		ljSignUpPage().clickOnSignUpLink();
+		ljSignUpPage().fillSignUpFormDetails(FirstName, LastName,Zipcode,Password,confirmPassword);
+		ljSignUpPage().uploadResumeFile();
+		ljSignUpPage().ClickIacceptCheckBox();
+		ljSignUpPage().clickOnSubmitButton();
+		ljSignUpPage().ClickOnSaveCareerGoals();
+		ljSignUpPage().verifyRequiredDetailsAtProfile();
+		ljSignUpPage().clickOnDocumentTab();
+		ljSignUpPage().documentAndResumeSectionScreenShot();
+		//ljSignUpPage().deleteAccoun();
+		  
+				
 	}
 }

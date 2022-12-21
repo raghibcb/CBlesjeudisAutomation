@@ -83,6 +83,14 @@ public class LJMyProfilePageObject extends PageFactoryInitializer {
 	}
 	
 	@Step("upload resume")
+	public LJMyProfilePageObject scrShootAtUploadResumeForDownoadResume() throws Exception {
+		Thread.sleep(8000);
+	saveFullPageMultiPleScreenshot("./src/test/resources/Reports/Images/tests.LJMypofileTest/lJVerifyUserAbleToDownLoadAddResume/" + "uploadResumeFileSrcForDownload" + ".png");
+			 Thread.sleep(3000);
+		return this;
+	}
+	
+	@Step("upload resume")
 	public LJMyProfilePageObject scrShootAtUploadResume() throws Exception {
 		Thread.sleep(8000);
 	saveFullPageMultiPleScreenshot("./src/test/resources/Reports/Images/tests.LJMypofileTest/lJVerifyUserAbleToAddResumeeWithUploadResume/" + "uploadResumeFileSrc" + ".png");

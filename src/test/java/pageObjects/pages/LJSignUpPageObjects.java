@@ -24,6 +24,7 @@ public class LJSignUpPageObjects extends PageFactoryInitializer {
     
 	BaseMethod base = new BaseMethod();
 	String filepath = System.getProperty("user.dir") + "/FileToUpload/John_Mclain.doc";
+	static String copyfilepath = System.getProperty("user.dir") + "/FileToUpload/Ankush Resume.docx";
 	
 	@FindBy(xpath="//a[contains(text(),'Déposer un CV')]")
 	private WebElement signUpLink;
@@ -335,6 +336,15 @@ public class LJSignUpPageObjects extends PageFactoryInitializer {
 	@FindBy(xpath="//label[contains(@for,'_currently_enrolled_here')]")
 	private WebElement currentlyEnrolled;
 	
+	@FindBy(xpath = "//span[contains(text(),'John_Mclain.doc')]")
+	private WebElement uploadedResumText;
+	
+	@FindBy(xpath="(//span[contains(text(),'Testing Engineering Specialist')])[1]")
+	private WebElement proileTitle;
+	
+	@FindBy(xpath="(//span[contains(text(),'Testing Engineering Specialist')])[2]")
+	private WebElement ResumeTitle;
+	
 	@Step("enter email address")
 	public LJSignUpPageObjects enterEmailAddress() throws Exception {
 		Thread.sleep(10000); 
@@ -374,7 +384,7 @@ public class LJSignUpPageObjects extends PageFactoryInitializer {
 	public LJSignUpPageObjects ReadandCopyPaseForAddResume()throws Exception{
 		base.mousehover(uploadFileWithcopyPaste);
 		uploadFileWithcopyPaste.click();
-		 XWPFDocument doc = new XWPFDocument(Files.newInputStream(Paths.get(filepath)));
+		 XWPFDocument doc = new XWPFDocument(Files.newInputStream(Paths.get(copyfilepath)));
 		XWPFWordExtractor xwpfWordExtractor = new XWPFWordExtractor(doc);
 	     String docText = xwpfWordExtractor.getText();
 	     StringSelection stringSelection = new StringSelection(docText);
@@ -501,7 +511,8 @@ public class LJSignUpPageObjects extends PageFactoryInitializer {
 		//utils.ScrollUtils.scrollByPixel(300);
 		utils.ScrollUtils.scrollToBottom();
 		utils.ExplicitWaiting.explicitWaitElementToBeClickable(saveCareerGoals, 60);
-		saveCareerGoals.click();
+		//saveCareerGoals.click();
+		JSclick(saveCareerGoals);
 		return this;
 	}
 	
@@ -521,6 +532,16 @@ public class LJSignUpPageObjects extends PageFactoryInitializer {
 		visibleToggleAtProfileOn.isDisplayed();
 		Thread.sleep(30000);
 		saveFullPageMultiPleScreenshot("./src/test/resources/Reports/Images/tests.LJSignUpTest/lJSignUpWithUploadResumeValidateProfileVisibility/" + "VisibleCheckboxON" + ".png");
+	    Thread.sleep(3000);
+		return this;
+	}
+	
+	@Step("visible toggle On")
+	public LJSignUpPageObjects verifyRequiredDetailsAtProfile() throws Exception {
+	    utils.ExplicitWaiting.explicitWaitElementToBeClickable(proileTitle, 60);
+		proileTitle.isDisplayed();
+		Thread.sleep(30000);
+		saveFullPageMultiPleScreenshot("./src/test/resources/Reports/Images/tests.LJSignUpTest/lJVerifyRequiredDetailsAddedAutomatically/" + "verifyDetails" + ".png");
 	    Thread.sleep(3000);
 		return this;
 	}
@@ -561,6 +582,17 @@ public class LJSignUpPageObjects extends PageFactoryInitializer {
 	}
 	
 	@Step("visible toggle off")
+	public LJSignUpPageObjects documentAndResumeSectionScreenShot() throws Exception {
+		utils.ExplicitWaiting.explicitWaitVisibilityOfElement(uploadedResumText, 120);
+		uploadedResumText.isDisplayed();
+		ResumeTitle.isDisplayed();
+	    Thread.sleep(3000);
+		saveFullPageMultiPleScreenshot("./src/test/resources/Reports/Images/tests.LJSignUpTest/lJVerifyRequiredDetailsAddedAutomatically/" + "resuemeSection" + ".png");
+	    Thread.sleep(3000);
+		return this;
+	}
+	
+	@Step("visible toggle off")
 	public LJSignUpPageObjects ContactreferenceForCopyPasteTabSectionScreenShot() throws Exception {
 	    Thread.sleep(30000);
 		saveFullPageMultiPleScreenshot("./src/test/resources/Reports/Images/tests.LJSignUpTest/lJSignUpWithCopyPaste/" + "contactPreferencesCopyPaste" + ".png");
@@ -569,9 +601,49 @@ public class LJSignUpPageObjects extends PageFactoryInitializer {
 	}
 	
 	@Step("visible toggle off")
+	public LJSignUpPageObjects MyResumeForCopyPasteTabSectionScreenShot() throws Exception {
+	    Thread.sleep(3000);
+		saveFullPageMultiPleScreenshot("./src/test/resources/Reports/Images/tests.LJMypofileTest/lJVerifyUserAbleToAddResumeeWithCopyPaste/" + "documentTabBefforeCopyPaste" + ".png");
+	    Thread.sleep(3000);
+		return this;
+	}
+	
+	@Step("visible toggle off")
+	public LJSignUpPageObjects MyResumeTabForUploadScreenShot() throws Exception {
+	    Thread.sleep(30000);
+		saveFullPageMultiPleScreenshot("./src/test/resources/Reports/Images/tests.LJMypofileTest/lJVerifyUserAbleToAddResumeeWithUploadResume/" + "documentTabBeforeUploadResume" + ".png");
+	    Thread.sleep(3000);
+		return this;
+	}
+	
+	@Step("visible toggle off")
 	public LJSignUpPageObjects clickOnDocumentTab() throws Exception {
 	    utils.ExplicitWaiting.explicitWaitElementToBeClickable(documetTab, 60);
 	    documetTab.click();
+		return this;
+	}
+	
+	@Step("visible toggle off")
+	public LJSignUpPageObjects screenShotForUploadCopyPastekOnDocumentTab() throws Exception {
+		Thread.sleep(30000);
+		saveFullPageMultiPleScreenshot("./src/test/resources/Reports/Images/tests.LJMypofileTest/lJVerifyUserAbleToAddResumeeWithCopyPaste/" + "documentTabAfterCopyPasteCopyPaste" + ".png");
+	    Thread.sleep(3000);
+		return this;
+	}
+	
+	@Step("visible toggle off")
+	public LJSignUpPageObjects screenShotForUploadResumeOnDocumentTab() throws Exception {
+		Thread.sleep(30000);
+		saveFullPageMultiPleScreenshot("./src/test/resources/Reports/Images/tests.LJMypofileTest/lJVerifyUserAbleToAddResumeeWithUploadResume/" + "documentTabAfterUploadResume" + ".png");
+	    Thread.sleep(3000);
+		return this;
+	}
+	
+	@Step("visible toggle off")
+	public LJSignUpPageObjects screenShotBeforeDownloadOnDocumentTab() throws Exception {
+		Thread.sleep(30000);
+		saveFullPageMultiPleScreenshot("./src/test/resources/Reports/Images/tests.LJMypofileTest/lJVerifyUserAbleToDownLoadAddResume/" + "documentTabBeforeDownload" + ".png");
+	    Thread.sleep(3000);
 		return this;
 	}
 	

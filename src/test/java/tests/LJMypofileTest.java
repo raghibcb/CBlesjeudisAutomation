@@ -17,12 +17,17 @@ public class LJMypofileTest extends PageFactoryInitializer {
 		ljSignUpPage().verifyPageTitle();
 		ljMyProfilePage().navigateToMyProfile();
 		ljSignUpPage().clickOnDocumentTab();
+		ljSignUpPage().MyResumeForCopyPasteTabSectionScreenShot();
+		//src
 		ljMyProfilePage().clickOnRemoveOrAddResumeLink();
 		ljMyProfilePage().clickOnuploadResumeIcon();
 		ljSignUpPage().ReadandCopyPaseForAddResume();
+		//src
 		ljMyProfilePage().clickOnUploadCopyPasteResumeButton();
 		ljMyProfilePage().verifyCopyPasteToastMessage();
-		ljSignUpPage().clickOnDocumentTab();
+		//ljSignUpPage().clickOnDocumentTab();
+		ljSignUpPage().screenShotForUploadCopyPastekOnDocumentTab();
+		//src
 		// ljSignUpPage().deleteAccoun();
 
 	}
@@ -36,13 +41,16 @@ public class LJMypofileTest extends PageFactoryInitializer {
 		ljSignUpPage().verifyPageTitle();
 		ljMyProfilePage().navigateToMyProfile();
 		ljSignUpPage().clickOnDocumentTab();
+		ljSignUpPage(). MyResumeTabForUploadScreenShot();
+		//scr
 		ljMyProfilePage().clickOnRemoveOrAddResumeLink();
 		ljMyProfilePage().clickOnuploadResumeIcon();
 		ljMyProfilePage().uploadResumeFile();
 		ljMyProfilePage().scrShootAtUploadResume();
 		ljMyProfilePage().clickOnUploadCopyPasteResumeButton();
 		ljMyProfilePage().verifyToastMessage();
-		ljSignUpPage().clickOnDocumentTab();
+		//ljSignUpPage().clickOnDocumentTab();
+		ljSignUpPage().screenShotForUploadResumeOnDocumentTab();
 		// ljSignUpPage().deleteAccoun();
 
 	}
@@ -58,18 +66,21 @@ public class LJMypofileTest extends PageFactoryInitializer {
 		ljMyProfilePage().navigateToMyProfile();
 		ljSignUpPage().clickOnDocumentTab();
 		ljMyProfilePage().clickOnRemoveOrAddResumeLink();
+		//scrn
 		ljMyProfilePage().clickOnuploadResumeIcon();
 		ljSignUpPage().clickOnBuildResumeOption();
 		ljMyProfilePage().clickOnUploadCopyPasteResumeButton();
 		ljSignUpPage().enterPersonalInforMationForBuildResume(city);
 		ljSignUpPage().clickOnPersonalInformationNextButton();
 		ljSignUpPage().fillworkhistorydetails(jobtitle, company);
+		
 		// String Month = Integer.toString((int) Startdatemonth);
 		ljSignUpPage().selectStartdate("0");
 		// String EndMonth = Integer.toString((int) Enddatemonth);
 		ljSignUpPage().selectEnddate("4");
 		ljSignUpPage().clickOnNext();
 		ljSignUpPage().fillEducaionDetails(Degree, SchoolName, SubjectName);
+		//scrn
 		ljSignUpPage().clickOnCreateAccountUsingBuildButton();
 		ljMyProfilePage().verifyToastMessage();
 		ljSignUpPage().clickOnDocumentTab();
@@ -87,13 +98,16 @@ public class LJMypofileTest extends PageFactoryInitializer {
 		ljSignUpPage().verifyPageTitle();
 		ljMyProfilePage().navigateToMyProfile();
 		ljSignUpPage().clickOnDocumentTab();
+		//ljSignUpPage().screenShotBeforeDownloadOnDocumentTab();
+		//scr
 		ljMyProfilePage().clickOnRemoveOrAddResumeLink();
 		ljMyProfilePage().clickOnuploadResumeIcon();
 		ljMyProfilePage().uploadResumeFile();
-		ljMyProfilePage().scrShootAtUploadResume();
+		ljMyProfilePage().scrShootAtUploadResumeForDownoadResume();
 		ljMyProfilePage().clickOnUploadCopyPasteResumeButton();
 		ljMyProfilePage().verifyToastMessage();
-		ljSignUpPage().clickOnDocumentTab();
+		//ljSignUpPage().clickOnDocumentTab();
+		ljSignUpPage().screenShotBeforeDownloadOnDocumentTab();
 		ljMyProfilePage().downloadResume();
 		// ljSignUpPage().deleteAccoun();
 
