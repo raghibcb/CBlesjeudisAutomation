@@ -10,30 +10,30 @@ public class LJSignUpTest extends PageFactoryInitializer {
 
 	@Description("Verify that user is able to SignUp successfully without Resume")
 	@Test(dataProvider="excelSheetNameAsMethodName",dataProviderClass=ExcelDataProvider.class)
-	public void LJSignUpWithoutResume(String testCaseID,String FirstName,String LastName,String Zipcode,String Password,String confirmPassword) throws Exception
-	{   //String zip_code = Integer.toString((int) Zipcode);
+	public void LJSignUpWithoutResume(String testCaseID,String FirstName,String LastName,double Zipcode,String Password,String confirmPassword) throws Exception
+	{   String zip_code = Integer.toString((int) Zipcode);
 		ljSignUpPage().clickOnSignUpLink();
-		ljSignUpPage().fillSignUpFormDetails(FirstName, LastName,Zipcode,Password,confirmPassword);
+		ljSignUpPage().fillSignUpFormDetails(FirstName, LastName,zip_code,Password,confirmPassword);
 		//ljSignUpPage().uploadResumeFile();
 		ljSignUpPage().clickOnIacceptCheckBox();
 		ljSignUpPage().clickOnSubmitButton();
 		//scrn shoot
 		//Again Upload Resume
 		//Again Screen shot
-		ljSignUpPage().deleteAccoun();
+		//ljSignUpPage().deleteAccoun();
 		  
 				
 	}
 	
 	@Description("Verify the validation messages for mandatory field on SignUp page")
 	@Test(dataProvider="excelSheetNameAsMethodName",dataProviderClass=ExcelDataProvider.class)
-	public void LJSignUpAndValidateMandatoryfield(String testCaseID,String FirstName,String LastName,String Zipcode,String Password,String confirmPassword) throws Exception
-	{   //String zip_code = Integer.toString((int) Zipcode);
+	public void LJSignUpAndValidateMandatoryfield(String testCaseID,String FirstName,String LastName,double Zipcode,String Password,String confirmPassword) throws Exception
+	{   String zip_code = Integer.toString((int) Zipcode);
 		ljSignUpPage().clickOnSignUpLink();
 		ljSignUpPage().clickOnSubmitButton();
 		ljSignUpPage().validateMandatoryFieldErrorMessage();
 		//scrn
-		ljSignUpPage().fillSignUpFormDetailsAndValdateMandatoryFields(FirstName, LastName,Zipcode,Password,confirmPassword);
+		ljSignUpPage().fillSignUpFormDetailsAndValdateMandatoryFields(FirstName, LastName,zip_code,Password,confirmPassword);
 		ljSignUpPage().uploadResumeFile();
 		ljSignUpPage().clickOnVisibleCheckBox();
 		ljSignUpPage().ClickIacceptCheckBox();
@@ -41,17 +41,17 @@ public class LJSignUpTest extends PageFactoryInitializer {
 		ljSignUpPage().ClickOnSaveCareerGoals();
 		ljSignUpPage().verifyVisibleToggleOffAtProfile();
 		ljSignUpPage().clickOnContactreferenceTab();
-		ljSignUpPage().deleteAccoun();
+		//ljSignUpPage().deleteAccoun();
 		  
 				
 	}
 	
 	@Description("Verify that user is able to SignUp successfully with Upload Resume Option and resumes details are visible correctly in MyProfile page")
 	@Test(dataProvider="excelSheetNameAsMethodName",dataProviderClass=ExcelDataProvider.class)
-	public void lJSignUpWithUploadResumeValidateProfileVisibility(String testCaseID,String FirstName,String LastName,String Zipcode,String Password,String confirmPassword) throws Exception
-	{   //String zip_code = Integer.toString((int) Zipcode);
+	public void lJSignUpWithUploadResumeValidateProfileVisibility(String testCaseID,String FirstName,String LastName,double Zipcode,String Password,String confirmPassword) throws Exception
+	{   String zip_code = Integer.toString((int) Zipcode);
 		ljSignUpPage().clickOnSignUpLink();
-		ljSignUpPage().fillSignUpFormDetails(FirstName, LastName,Zipcode,Password,confirmPassword);
+		ljSignUpPage().fillSignUpFormDetails(FirstName, LastName,zip_code,Password,confirmPassword);
 		ljSignUpPage().uploadResumeFile();
 		ljSignUpPage().ClickIacceptCheckBox();
 		ljSignUpPage().clickOnSubmitButton();
@@ -67,10 +67,10 @@ public class LJSignUpTest extends PageFactoryInitializer {
 	
 	@Description("Verify that user is able to SignUp successfully with Copy/Paste Resume Option and resumes details are visible correctly in MyProfile page")
 	@Test(dataProvider="excelSheetNameAsMethodName",dataProviderClass=ExcelDataProvider.class)
-	public void lJSignUpWithCopyPaste(String testCaseID,String FirstName,String LastName,String Zipcode,String Password,String confirmPassword) throws Exception
-	{   //String zip_code = Integer.toString((int) Zipcode);
+	public void lJSignUpWithCopyPaste(String testCaseID,String FirstName,String LastName,double Zipcode,String Password,String confirmPassword) throws Exception
+	{   String zip_code = Integer.toString((int) Zipcode);
 		ljSignUpPage().clickOnSignUpLink();
-		ljSignUpPage().fillSignUpFormDetails(FirstName, LastName,Zipcode,Password,confirmPassword);
+		ljSignUpPage().fillSignUpFormDetails(FirstName, LastName,zip_code,Password,confirmPassword);
 		ljSignUpPage().clickOnuploadResumeIcon();
 	//ljSignUpPage().uploadResumeFile();
 		ljSignUpPage().ReadandCopyPase();
@@ -122,11 +122,11 @@ public class LJSignUpTest extends PageFactoryInitializer {
 	
 	@Description("Verify that user is able to SignUp successfully with Build Resume Option and resumes details are visible correctly in MyProfile page")
 	@Test(dataProvider="excelSheetNameAsMethodName",dataProviderClass=ExcelDataProvider.class)
-	public void ljSignUpUsingBuildResumeOption(String testCaseID,String FirstName,String LastName,String Zipcode,String Password,String confirmPassword,String city,String jobtitle,String company,String Startdatemonth,String Enddatemonth,String Degree,String SchoolName,String SubjectName) throws Exception
-	{    
+	public void ljSignUpUsingBuildResumeOption(String testCaseID,String FirstName,String LastName,double Zipcode,String Password,String confirmPassword,String city,String jobtitle,String company,double Startdatemonth,double Enddatemonth,String Degree,String SchoolName,String SubjectName) throws Exception
+	{   String zipcodeStr = Integer.toString((int) Zipcode); 
 		ljSignUpPage().clickOnSignUpLink();
 		//String zipcodeStr = Integer.toString((int) Zipcode);
-		ljSignUpPage().fillSignUpFormDetails(FirstName, LastName,Zipcode,Password,confirmPassword);
+		ljSignUpPage().fillSignUpFormDetails(FirstName, LastName,zipcodeStr,Password,confirmPassword);
 		ljSignUpPage().clickOnuploadResumeIcon();
 		ljSignUpPage().clickOnBuildResumeOption();
 		ljSignUpPage().ClickIacceptCheckBox();
@@ -135,10 +135,10 @@ public class LJSignUpTest extends PageFactoryInitializer {
 		ljSignUpPage().clickOnPersonalInformationNextButton();
 		//scrn
 		ljSignUpPage().fillworkhistorydetails(jobtitle,company);
-		//String Month = Integer.toString((int) Startdatemonth);
-		ljSignUpPage().selectStartdate("0");
-		//String EndMonth = Integer.toString((int) Enddatemonth);
-		ljSignUpPage().selectEnddate("4");
+		String Month = Integer.toString((int) Startdatemonth);
+		ljSignUpPage().selectStartdate(Month);
+		String EndMonth = Integer.toString((int) Enddatemonth);
+		ljSignUpPage().selectEnddate(EndMonth);
 		ljSignUpPage().clickOnNext();
 		ljSignUpPage().fillEducaionDetails(Degree,SchoolName,SubjectName);
 		//scrn
@@ -152,10 +152,10 @@ public class LJSignUpTest extends PageFactoryInitializer {
 	
 	@Description("Verify that required details are Automatically added to Career Goals page after user Registers using resume")
 	@Test(dataProvider="excelSheetNameAsMethodName",dataProviderClass=ExcelDataProvider.class)
-	public void lJVerifyRequiredDetailsAddedAutomatically(String testCaseID,String FirstName,String LastName,String Zipcode,String Password,String confirmPassword) throws Exception
-	{   //String zip_code = Integer.toString((int) Zipcode);
+	public void lJVerifyRequiredDetailsAddedAutomatically(String testCaseID,String FirstName,String LastName,double Zipcode,String Password,String confirmPassword) throws Exception
+	{   String zip_code = Integer.toString((int) Zipcode);
 		ljSignUpPage().clickOnSignUpLink();
-		ljSignUpPage().fillSignUpFormDetails(FirstName, LastName,Zipcode,Password,confirmPassword);
+		ljSignUpPage().fillSignUpFormDetails(FirstName, LastName,zip_code,Password,confirmPassword);
 		ljSignUpPage().uploadResumeFile();
 		ljSignUpPage().ClickIacceptCheckBox();
 		ljSignUpPage().clickOnSubmitButton();

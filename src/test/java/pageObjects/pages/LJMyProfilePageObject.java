@@ -3,8 +3,10 @@ package pageObjects.pages;
 import java.io.File;
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import controllers.BaseMethod;
@@ -15,7 +17,8 @@ public class LJMyProfilePageObject extends PageFactoryInitializer {
 	
 	BaseMethod base = new BaseMethod();
 	String filepath = System.getProperty("user.dir") + "/FileToUpload/John_Mclain.doc";
-	
+	 
+	static String getJobTitle,getdesiredlocation,getdesiredsalary,getcurrency,getfrequency,getemployementtype;
 	 
 	String Resumedownloadpath="//src/test//resources//Download";
 
@@ -50,6 +53,230 @@ public class LJMyProfilePageObject extends PageFactoryInitializer {
 	
 	@FindBy(xpath="//span[contains(text(),'Félicitations, vous avez réussi à télécharger un nouveau CV.')]")
 	private WebElement copyToastMessage;
+	//==========Goal Test========
+	
+	@FindBy(xpath="//a[contains(text(),'Modifier Objectifs Professionnels')]")
+	private WebElement editLink;
+	
+	@FindBy(xpath="//h2[contains(text(),'Career Goals')]")
+	private WebElement careergoals;
+	
+	@FindBy(xpath="//input[@id='desired_jobtitle']")
+	private WebElement jobTitle;
+	
+	@FindBy(xpath="//input[starts-with(@id,'target_pay_value')]")
+	private WebElement desireSalary;
+	
+	@FindBy(xpath="//select[@id='target_pay_currency']")
+	private WebElement currency;
+	
+	public WebElement selectCurrency(String currencyName) {
+		WebElement element = getWebDriver()
+				.findElement(By.xpath("//select[starts-with(@id,'target_pay_currency')]/option[contains(text(),\"" + currencyName + "\")]"));
+		return element;
+	}
+	
+	@FindBy(xpath="//select[@id='target_pay_frequency']")
+	private WebElement frequency;
+	
+	public WebElement selectFrequency(String frequencyName) {
+		WebElement element = getWebDriver()
+				.findElement(By.xpath("//select[starts-with(@id,'target_pay_frequency')]/option[contains(text(),\"" + frequencyName + "\")]"));
+		return element;
+	}
+	
+	@FindBy(xpath="//div[@class='selectize-control emp-types-select multi plugin-remove_button']//div[@class='selectize-input items not-full has-options has-items']//input")
+	private WebElement desireEmployeementtype;
+	
+	@FindBy(xpath="//label[@for='availability_1']")
+	private WebElement clickopen;
+	
+	@FindBy(xpath="//input[@name='commit']")
+	private WebElement savegoals;
+	
+	@FindBy(xpath="//span[contains(text(),'Desired Job Title:')]//parent::div//following-sibling::div//child::span")
+	private WebElement jobtitleheading;
+	
+	public WebElement verifyjobtitle(String jobtitle) {
+		WebElement element = getWebDriver()
+				.findElement(By.xpath("//span[@class='b'][contains(text(),'"+jobtitle+"')]"));
+		return element;
+	}
+	
+	//New changes 
+	
+		public WebElement verifyDesirelocation(String Location) {
+			WebElement element = getWebDriver().findElement(By.xpath("//span[contains(text(),'"+Location+"')]"));
+			return element;
+		}
+		
+		public WebElement verifysalary(String salary,String frequencyName) {
+			WebElement element = getWebDriver()
+					.findElement(By.xpath("//span[contains(text(),'$"+salary+" par "+"mois')]"));
+			return element;
+		}
+		
+		public WebElement verifyremotecheckbox() {
+			WebElement element = getWebDriver().findElement(By.xpath("//span[contains(text(),'(Open to Remote positions)')]"));
+					return element;
+		}
+		
+		public WebElement verifyEmployeementtype(String Employeementtype) {
+			WebElement element = getWebDriver().findElement(By.xpath("//span[contains(text(),'"+Employeementtype+"')]"));
+			return element;
+		}
+		
+		
+		//Previous data verify changes
+		public WebElement verifypreviousjobtitle() {
+			WebElement element = getWebDriver()
+					.findElement(By.xpath("//span[@class='b'][contains(text(),'"+getJobTitle+"')]"));
+			return element;
+		}
+		
+		public WebElement verifyprevioussalary() {
+			WebElement element = getWebDriver()
+					.findElement(By.xpath("//span[contains(text(),'"+getdesiredsalary+" "+"per month')]"));
+			return element;
+		}
+		
+//		@FindBy(xpath="//span[contains(text(),'Desired Location(s):')]//parent::div//following-sibling::div")
+//		private WebElement location;
+		
+		
+		
+		@FindBy(xpath="//span[contains(text(),'$78635 per month')]")
+		private WebElement verifysalary;
+		
+		@FindBy(xpath="//span[contains(text(),'Open to opportunity')]")
+		private WebElement verifyavailabity;
+		
+		@Step("Edit link")
+		public LJMyProfilePageObject editlink() throws Exception{
+			utils.ExplicitWaiting.explicitWaitElementToBeClickable(editLink,60);
+			editLink.click();
+			return this;
+			
+		}
+		
+		//13th july changes
+		@FindBy(xpath="//div[@data-value='Orlando, FL']")
+		private WebElement locationvalue;
+		
+		@FindBy(xpath="(//*[@class=\"selectize-dropdown-content\"])[1]")
+		private WebElement locationvalueFirst;
+		
+		
+		@FindBy(xpath="//div[@data-value='ETPE']")
+		private WebElement employementdatavalue;
+		
+		@FindBy(xpath="//div[@class='selectize-control relocations-select multi plugin-remove_button']//div[@class='selectize-input items not-full has-options has-items']//input")
+		private WebElement desireLocation;
+		
+		@FindBy(xpath="//span[contains(text(),'Where do you want to work?')]")
+		private WebElement heading;
+		
+		@FindBy(xpath="//label[@for='remote_work']")
+		private WebElement checkRemotebutton;
+		
+		@Step("Enter all Details")
+		public LJMyProfilePageObject EnterDetails(String jobtitle, String Location,String salary,String currencyName,String frequencyName,String Employeementtype) throws Exception{
+		utils.ExplicitWaiting.explicitWaitVisibilityOfElement(jobTitle, 10);
+		getJobTitle=jobTitle.getAttribute("value");
+		System.out.println(getJobTitle);
+		getdesiredsalary=desireSalary.getAttribute("value");
+		System.out.println(getdesiredsalary);
+		se = new Select(currency);
+		WebElement options=se.getFirstSelectedOption();
+		getcurrency=options.getText();
+		System.out.println(getcurrency);
+		se = new Select(frequency);
+		WebElement optio=se.getFirstSelectedOption();
+		getfrequency=optio.getText();
+		System.out.println(getfrequency);
+		jobTitle.click();
+		jobTitle.clear();
+		jobTitle.sendKeys(jobtitle);
+		//new changes
+		//desireLocation.sendKeys(Location);
+		Thread.sleep(3000);
+		//locationvalue.click();
+		//locationvalueFirst.click();
+		Thread.sleep(3000);
+		
+		
+		
+//		utils.ExplicitWaiting.explicitWaitElementToBeClickable(desireLocation, 50);
+//		heading.isDisplayed();
+		
+//		desireLocation.click();
+//		base.hitBackspace();
+	//	
+		
+//		selectLocation(location).click();
+		
+//		checkRemotebutton.isSelected();
+		
+		desireSalary.click();
+		desireSalary.clear();
+		desireSalary.sendKeys(salary);
+		Thread.sleep(2000);
+		//checkRemotebutton.click();
+		selectCurrency(currencyName).click();
+		selectFrequency(frequencyName).click();	
+		Thread.sleep(2000);
+//	utils.ExplicitWaiting.explicitWaitElementToBeClickable(desireEmployeementtype, 120);
+//		desireEmployeementtype.sendKeys(Employeementtype);
+//		Thread.sleep(3000);
+//		employementdatavalue.click();
+	//	
+//		clickopen.click();
+		
+		
+//		Thread.sleep(2000);
+//		desireEmployeementtype.sendKeys(Keys.TAB);
+		
+		
+//		Thread.sleep(20);
+//		desireEmployeementtype.clear();
+//		base.hitBackspace();
+		
+//		selectEmployment(employment).click();
+		
+//		utils.ExplicitWaiting.explicitWaitElementToBeSelected(clickopen, 40);
+//		clickopen.isSelected();
+		utils.ScrollUtils.scrollByPixel(200);
+		utils.ExplicitWaiting.explicitWaitVisibilityOfElement(savegoals, 40);
+		//savegoals.click();
+		JSclick(savegoals);
+		
+
+			return this;
+		}
+		
+		@Step("Candidate Verify Details")
+		public LJMyProfilePageObject VerfiyDetails(String jobtitle,String Location,String salary,String currency,String frequencyName,String Employeementtype) throws Exception{
+			utils.ExplicitWaiting.explicitWaitVisibilityOfElement(verifyjobtitle(jobtitle), 20);
+			verifyjobtitle(jobtitle).isDisplayed();
+//			location.isDisplayed();
+			verifyDesirelocation(Location).isDisplayed();
+			Thread.sleep(10000);
+			try {
+			verifyremotecheckbox().isDisplayed();
+			}
+			catch(Exception e)
+			{
+				e.getStackTrace();
+			}
+			verifysalary(salary,frequencyName).isDisplayed();
+			//verifyEmployeementtype(Employeementtype).isDisplayed();
+//			utils.ExplicitWaiting.explicitWaitVisibilityOfElement(verifysalary(salary, currency,frequency), 20);
+//			verifysalary(salary, currency,frequency).isDisplayed();
+			//verifyavailabity.isDisplayed();
+			return this;
+		}
+		
+		
 	
 	@Step("click On upload Resume Icon")
 	public LJMyProfilePageObject clickOnUploadCopyPasteResumeButton() throws Exception {

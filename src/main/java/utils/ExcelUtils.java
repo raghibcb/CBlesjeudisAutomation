@@ -206,7 +206,7 @@ public class ExcelUtils
 				String stringCellData = xlsxCell.getStringCellValue();
 				CellData = stringCellData;
 			}
-			/*		else if(xlsxCell.getCellType() == Cell.CELL_TYPE_NUMERIC)
+					else if(xlsxCell.getCellType() == Cell.CELL_TYPE_NUMERIC)
 			{
 				double numericCellData =  xlsxCell.getNumericCellValue();
 				CellData = numericCellData;
@@ -215,7 +215,7 @@ public class ExcelUtils
 			{
 				boolean booleanCellData =  xlsxCell.getBooleanCellValue();
 				CellData = booleanCellData;
-			}	*/	
+			}	
 			return CellData;
 		}
 		catch (Exception e)

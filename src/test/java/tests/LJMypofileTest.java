@@ -82,7 +82,7 @@ public class LJMypofileTest extends PageFactoryInitializer {
 		ljSignUpPage().fillEducaionDetails(Degree, SchoolName, SubjectName);
 		//scrn
 		ljSignUpPage().clickOnCreateAccountUsingBuildButton();
-		ljMyProfilePage().verifyToastMessage();
+		//ljMyProfilePage().verifyToastMessage();
 		ljSignUpPage().clickOnDocumentTab();
 		// ljSignUpPage().deleteAccoun();
 
@@ -112,5 +112,23 @@ public class LJMypofileTest extends PageFactoryInitializer {
 		// ljSignUpPage().deleteAccoun();
 
 	}
+	
+	@Description("Verify that user is able to edit the required field on Career Goals page")
+	@Test(dataProvider = "excelSheetNameAsMethodName", dataProviderClass = ExcelDataProvider.class)
+	public void lJeditandupdateCareergoals(String testCaseID, String email, String password,String jobtitle,String Location,double salary,String currencyName,String frequencyName,String Employeementtype)
+			throws Exception { 
+		// String zip_code = Integer.toString((int) Zipcode);
+		ljSignUpPage().clickOnSignInLink();
+		ljSignUpPage().enterLoginDetailAndSubmit(email, password);
+		ljSignUpPage().verifyPageTitle();
+		ljMyProfilePage().navigateToMyProfile();
+		ljMyProfilePage().editlink();
+		String Salary=Integer.toString((int) salary);
+		ljMyProfilePage().EnterDetails(jobtitle,Location,Salary,currencyName,frequencyName,Employeementtype);
+		ljMyProfilePage().VerfiyDetails(jobtitle,Location,Salary, currencyName,frequencyName,Employeementtype);
+		 
+
+	}
+
 
 }
